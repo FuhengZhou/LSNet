@@ -553,7 +553,7 @@ class model(nn.Module):
         d_xg = self.d_res_conv_g(xg)
         d_xb = self.d_res_conv_b(xb)
         d_x_rgb=rearrange(d_x_rgb,'b c (h1 h) (w1 w)  -> b (h1 w1 c) h w',h1=2,w1=2)
-        d_x_rgb = self.d_biformer_rgb(d_x_rgb, 1)
+        d_x_rgb = self.d_biformer_rgb(d_x_rgb)
         d_x_rgb = self.up1(d_x_rgb)
 
 
@@ -562,7 +562,7 @@ class model(nn.Module):
         o_xg = self.o_res_conv_g(xg)
         o_xb = self.o_res_conv_b(xb)
         o_x_rgb = rearrange(o_x_rgb, 'b c (h1 h) (w1 w)  -> b (h1 w1 c) h w', h1=2, w1=2)
-        o_x_rgb = self.o_biformer_rgb(o_x_rgb, 2)
+        o_x_rgb = self.o_biformer_rgb(o_x_rgb)
         o_x_rgb = self.up2(o_x_rgb)
 
         d_x=torch.cat([d_xr,d_xg,d_xb,d_x_rgb],dim=1)
